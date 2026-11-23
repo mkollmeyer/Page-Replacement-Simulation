@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <unistd.h>
-#include <FIFO.h>
+#include "FIFO.h"
 
 FIFO::FIFO(int pageNumber){
   std::vector<int> pages;
