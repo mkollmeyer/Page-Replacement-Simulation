@@ -142,6 +142,30 @@ short-loop/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/short-loop.dir/build.make CMakeFiles/short-loop.dir/build
 .PHONY : short-loop/fast
 
+FIFO.o: FIFO.cpp.o
+.PHONY : FIFO.o
+
+# target to build an object file
+FIFO.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/FIFO.cpp.o
+.PHONY : FIFO.cpp.o
+
+FIFO.i: FIFO.cpp.i
+.PHONY : FIFO.i
+
+# target to preprocess a source file
+FIFO.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/FIFO.cpp.i
+.PHONY : FIFO.cpp.i
+
+FIFO.s: FIFO.cpp.s
+.PHONY : FIFO.s
+
+# target to generate assembly for a file
+FIFO.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/FIFO.cpp.s
+.PHONY : FIFO.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -184,6 +208,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... short-loop"
 	@echo "... vmtrace"
+	@echo "... FIFO.o"
+	@echo "... FIFO.i"
+	@echo "... FIFO.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
