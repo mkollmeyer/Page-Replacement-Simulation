@@ -142,102 +142,6 @@ short-loop/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/short-loop.dir/build.make CMakeFiles/short-loop.dir/build
 .PHONY : short-loop/fast
 
-FIFO.o: FIFO.cpp.o
-.PHONY : FIFO.o
-
-# target to build an object file
-FIFO.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/FIFO.cpp.o
-.PHONY : FIFO.cpp.o
-
-FIFO.i: FIFO.cpp.i
-.PHONY : FIFO.i
-
-# target to preprocess a source file
-FIFO.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/FIFO.cpp.i
-.PHONY : FIFO.cpp.i
-
-FIFO.s: FIFO.cpp.s
-.PHONY : FIFO.s
-
-# target to generate assembly for a file
-FIFO.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/FIFO.cpp.s
-.PHONY : FIFO.cpp.s
-
-clock.o: clock.cpp.o
-.PHONY : clock.o
-
-# target to build an object file
-clock.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/clock.cpp.o
-.PHONY : clock.cpp.o
-
-clock.i: clock.cpp.i
-.PHONY : clock.i
-
-# target to preprocess a source file
-clock.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/clock.cpp.i
-.PHONY : clock.cpp.i
-
-clock.s: clock.cpp.s
-.PHONY : clock.s
-
-# target to generate assembly for a file
-clock.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/clock.cpp.s
-.PHONY : clock.cpp.s
-
-lfu.o: lfu.cpp.o
-.PHONY : lfu.o
-
-# target to build an object file
-lfu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/lfu.cpp.o
-.PHONY : lfu.cpp.o
-
-lfu.i: lfu.cpp.i
-.PHONY : lfu.i
-
-# target to preprocess a source file
-lfu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/lfu.cpp.i
-.PHONY : lfu.cpp.i
-
-lfu.s: lfu.cpp.s
-.PHONY : lfu.s
-
-# target to generate assembly for a file
-lfu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/lfu.cpp.s
-.PHONY : lfu.cpp.s
-
-lru.o: lru.cpp.o
-.PHONY : lru.o
-
-# target to build an object file
-lru.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/lru.cpp.o
-.PHONY : lru.cpp.o
-
-lru.i: lru.cpp.i
-.PHONY : lru.i
-
-# target to preprocess a source file
-lru.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/lru.cpp.i
-.PHONY : lru.cpp.i
-
-lru.s: lru.cpp.s
-.PHONY : lru.s
-
-# target to generate assembly for a file
-lru.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/lru.cpp.s
-.PHONY : lru.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -262,6 +166,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+replacement.o: replacement.cpp.o
+.PHONY : replacement.o
+
+# target to build an object file
+replacement.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/replacement.cpp.o
+.PHONY : replacement.cpp.o
+
+replacement.i: replacement.cpp.i
+.PHONY : replacement.i
+
+# target to preprocess a source file
+replacement.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/replacement.cpp.i
+.PHONY : replacement.cpp.i
+
+replacement.s: replacement.cpp.s
+.PHONY : replacement.s
+
+# target to generate assembly for a file
+replacement.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vmtrace.dir/build.make CMakeFiles/vmtrace.dir/replacement.cpp.s
+.PHONY : replacement.cpp.s
+
 short-loop.o: short-loop.asm.o
 .PHONY : short-loop.o
 
@@ -280,21 +208,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... short-loop"
 	@echo "... vmtrace"
-	@echo "... FIFO.o"
-	@echo "... FIFO.i"
-	@echo "... FIFO.s"
-	@echo "... clock.o"
-	@echo "... clock.i"
-	@echo "... clock.s"
-	@echo "... lfu.o"
-	@echo "... lfu.i"
-	@echo "... lfu.s"
-	@echo "... lru.o"
-	@echo "... lru.i"
-	@echo "... lru.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... replacement.o"
+	@echo "... replacement.i"
+	@echo "... replacement.s"
 	@echo "... short-loop.o"
 .PHONY : help
 
