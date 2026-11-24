@@ -12,28 +12,28 @@
 #include "replacement.h"
 
 int main(int argc, char* argv[]) {
-    std::vector<std::string> args(argv + 1, argv + argc);
     bool q = false;
     bool verbose = false;
     std::string policy;
+    std::vector<char*> execArgs;
     int maxPages = 10;
-    for (size_t i = 0; i < args.size(); ++i) {
-        if (args[i] == "-q") {
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "-q") {
             q = true;
-        } 
-        else if (args[i] == "-p") {
-            if (i + 1 < args.size()) {
-                policy = args[i + 1];
-                ++i;
+        } else if (arg == "-p") {
+            if (i + 1 < argc) {
+                policy = argv[++i];
             } else {
                 std::cerr << "Error: --p requires a policy.\n";
                 return 1;
             }
-        } else if (args[i] == "-n") {
-            if (i + 1 < args.size()) {
+        } else if (arg == "-n") {
+            if (i + 1 < argc) {
+                std::string allocation = argv[++i];
                 std::size_t parsedLength = 0;
                 try {
-                    maxPages = std::stoi(args[i + 1], &parsedLength);
+                    maxPages = std::stoi(allocation, &parsedLength);
                 } catch (const std::invalid_argument&) {
                     std::cerr << "Error: -n requires a positive integer page allocation.\n";
                     return 1;
@@ -41,19 +41,36 @@ int main(int argc, char* argv[]) {
                     std::cerr << "Error: -n allocation is out of range.\n";
                     return 1;
                 }
-                if (parsedLength != args[i + 1].size() || maxPages <= 0) {
+                if (parsedLength != allocation.size() || maxPages <= 0) {
                     std::cerr << "Error: -n requires a positive integer page allocation.\n";
                     return 1;
                 }
-                ++i;
             } else {
                 std::cerr << "Error: -n requires a page allocation.\n";
                 return 1;
             }
-        } else if (args[i] == "-v") {
+        } else if (arg == "-v") {
             verbose = true;
-        } 
+        } else if (arg == "--") {
+            for (int j = i + 1; j < argc; ++j) {
+                execArgs.push_back(argv[j]);
+            }
+            break;
+        } else if (!arg.empty() && arg[0] != '-') {
+            for (int j = i; j < argc; ++j) {
+                execArgs.push_back(argv[j]);
+            }
+            break;
+        } else {
+            std::cerr << "Error: unknown option " << arg << ".\n";
+            return 1;
+        }
     }
+    char defaultProgram[] = "./short-loop";
+    if (execArgs.empty()) {
+        execArgs.push_back(defaultProgram);
+    }
+    execArgs.push_back(nullptr);
     if (policy != "fifo" && policy != "lru" && policy != "lfu" && policy != "clock") {
         std::cerr << "Error: select a policy with -p fifo|lru|lfu|clock.\n";
         return 1;
@@ -64,8 +81,9 @@ int main(int argc, char* argv[]) {
     if (ch_pid == 0) {
         ptrace(static_cast<__ptrace_request>(PTRACE_TRACEME), getpid(), nullptr, nullptr);
         raise(SIGSTOP);
-        char *args[] = {"./short-loop", NULL};
-        execvp(args[0], args);
+        execvp(execArgs[0], execArgs.data());
+        perror("execvp");
+        _exit(127);
     } else {
         struct user_regs_struct regs;
         int status;
