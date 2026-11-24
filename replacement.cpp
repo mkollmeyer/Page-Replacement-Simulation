@@ -19,12 +19,14 @@ void replacement::fifoAddPage(int addPage){
   ref++;
   fault = false;
   if (std::find(page.begin(), page.end(), addPage) == page.end()) {
-    if (ref >= maxPages) {
+    if (ref2 >= maxPages) {
+      ref2++;
       page.erase(page.begin());
       page.push_back(addPage);
       pageFault++;
       fault = true;
     } else {
+      ref2++;
       page.push_back(addPage);
     }
   }
