@@ -13,14 +13,17 @@ replacement::replacement(int pageNumber){
   ref2 = 0;
   lastPage = 0;
   hand = 0;
+  fault = false;
 }
 void replacement::fifoAddPage(int addPage){
   ref++;
+  fault = false;
   if (std::find(page.begin(), page.end(), addPage) == page.end()) {
     if (ref >= maxPages) {
       page.erase(page.begin());
       page.push_back(addPage);
       pageFault++;
+      fault = true;
     } else {
       page.push_back(addPage);
     }
@@ -31,6 +34,7 @@ void replacement::lfuAddPage(int addPage){
   auto it = pages.find(addPage);
   if (it != pages.end()) {
     pages[addPage] += 1;
+    fault = false;
   } else {
     ref2++;
     if (ref2 >= maxPages) {
@@ -44,8 +48,10 @@ void replacement::lfuAddPage(int addPage){
       pages.erase(minIt);
       pages[addPage] = 1;
       pageFault++;
+      fault = true;
     } else {
       pages.insert({addPage, 1});
+      fault = false;
     }
   }
 }
@@ -57,6 +63,7 @@ void replacement::lruAddPage(int addPage){
         val -= 1; 
     }
     pages[addPage] = maxPages;
+    fault = false;
   } else {
     ref2++;
     if (ref2 >= maxPages) {
@@ -73,11 +80,13 @@ void replacement::lruAddPage(int addPage){
       }
       pages[addPage] = maxPages;
       pageFault++;
+      fault = true;
     } else {
       for (auto& [key, val] : pages) {
         val -= 1; 
       }
       pages.insert({addPage, maxPages});
+      fault = false;
     }
   }
 }
@@ -86,6 +95,7 @@ void replacement::clockAddPage(int addPage){
   auto it = pages.find(addPage);
   if (it != pages.end()) {
     pages[addPage] = 1;
+    fault = false;
   } else {
     ref2++;
     if (ref2 >= maxPages) {
@@ -102,8 +112,10 @@ void replacement::clockAddPage(int addPage){
         hand = (hand + 1) % maxPages;
       }
       pageFault++;
+      fault = true;
     } else {
       pages.insert({addPage, 0});
+      fault = false;
     }
   }
 }
@@ -116,6 +128,11 @@ void replacement::print(unsigned long long int passPage, unsigned long long int 
       std::printf("[%d/%d] At: %llx\n", ref, pageFault, rip);
     }
   }
+}
+void replacement::printFault(unsigned long long int passPage, unsigned long long int rip) {
+    if (fault) {
+        std::printf("Page Fault #%d At: %llx\n", pageFault, rip);
+    }
 }
 void replacement::summary() {
     double calc = ref == 0 ? 0.0 : static_cast<double>(pageFault) / ref;

@@ -15,6 +15,7 @@ class replacement {
     int ref2;
     unsigned long long int lastPage;
     int hand;
+    bool fault;
 
   public:
     replacement(int pageNumber);
@@ -23,6 +24,7 @@ class replacement {
     void lfuAddPage(int addPage);
     void clockAddPage(int addPage);
     void print(unsigned long long int passPage, unsigned long long int rip, bool v);
+    void printFault(unsigned long long int passPage, unsigned long long int rip);
     void summary();
 };
 

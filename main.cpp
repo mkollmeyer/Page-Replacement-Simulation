@@ -116,6 +116,8 @@ int main(int argc, char* argv[]) {
             }
             if (!q) {
                 simulate.print(page, regs.rip, verbose);
+            } else {
+                simulate.printFault(page, regs.rip);
             }
             int sig = (WSTOPSIG(status) == SIGTRAP) ? 0 : WSTOPSIG(status);
             ptrace((__ptrace_request) PTRACE_SINGLESTEP, ch_pid, nullptr, reinterpret_cast<void*>(sig));
